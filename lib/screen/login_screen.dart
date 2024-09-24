@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,19 +11,19 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Welcome back!',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Enter username',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 20),
-            TextField(
+            const SizedBox(height: 20),
+            const TextField(
               decoration: InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
@@ -29,14 +31,14 @@ class LoginScreen extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Add sign-in functionality here
               },
-              child: Text('Sign in'),
+              child: const Text('Sign in'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 50),
               ),
             ),
             SizedBox(height: 20),
