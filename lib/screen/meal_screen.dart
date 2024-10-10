@@ -64,118 +64,108 @@ class _MealScreenState extends State<MealScreen> {
       appBar: AppBar(
         title: Text('Meals'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          elevation: 5,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Left side: Image
-              Container(
-                width: 850, // Adjust the width as needed
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                    image: NetworkImage(meal['strMealThumb'] ?? ''),
-                    fit: BoxFit.cover,
-                  ),
+        child: Column(
+          children: [
+            // Top: Image
+            Container(
+              height: 250, // Set a height for the image
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                image: DecorationImage(
+                  image: NetworkImage(meal['strMealThumb'] ?? ''),
+                  fit: BoxFit.cover,
                 ),
               ),
-              // Right side: Details
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Meal Name
-                      Text(
-                        meal['strMeal'] ?? 'No meal name',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      // Category
-                      Text(
-                        'Category: ${meal['strCategory'] ?? 'N/A'}',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      // Area
-                      Text(
-                        'Area: ${meal['strArea'] ?? 'N/A'}',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(height: 8),
-                      // Ingredients Section
-                      Text(
-                        'Ingredients:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      ...ingredients
-                          .map((ingredient) => Text(ingredient))
-                          .toList(),
-                      SizedBox(height: 8),
-                      // Instructions Section
-                      Text(
-                        'Instructions:',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Text(
-                            meal['strInstructions'] ??
-                                'No instructions available',
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ),
-                      ),
-                      // YouTube Button
-                      if (meal['strYoutube'] != null)
-                        ElevatedButton.icon(
-                          onPressed: () {
-                            launchUrl(Uri.parse(meal['strYoutube']));
-                          },
-                          icon: Icon(Icons.play_circle_filled),
-                          label: Text('Watch on YouTube'),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.redAccent,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 16,
-                            ),
-                          ),
-                        ),
-                      // Next Button
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: ElevatedButton(
-                          onPressed: _nextMeal,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueAccent,
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
-                          ),
-                          child: Text('Next Meal'),
-                        ),
-                      ),
-                    ],
+            ),
+            SizedBox(height: 16), // Space between image and details
+            // Bottom: Details
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Meal Name
+                  Text(
+                    meal['strMeal'] ?? 'No meal name',
+                    style: TextStyle(
+                      fontSize:
+                          22, // Increased font size for better readability
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  SizedBox(height: 8),
+                  // Category
+                  Text(
+                    'Category: ${meal['strCategory'] ?? 'N/A'}',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  // Area
+                  Text(
+                    'Area: ${meal['strArea'] ?? 'N/A'}',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 8),
+                  // Ingredients Section
+                  Text(
+                    'Ingredients:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ...ingredients
+                      .map((ingredient) =>
+                          Text(ingredient, style: TextStyle(fontSize: 14)))
+                      .toList(),
+                  SizedBox(height: 8),
+                  // Instructions Section
+                  Text(
+                    'Instructions:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    meal['strInstructions'] ?? 'No instructions available',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  // YouTube Button
+                  if (meal['strYoutube'] != null)
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        launchUrl(Uri.parse(meal['strYoutube']));
+                      },
+                      icon: Icon(Icons.play_circle_filled),
+                      label: Text('Watch on YouTube'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 16,
+                        ),
+                      ),
+                    ),
+                  // Next Button
+                  SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ElevatedButton(
+                      onPressed: _nextMeal,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      ),
+                      child: Text('Next Meal'),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
