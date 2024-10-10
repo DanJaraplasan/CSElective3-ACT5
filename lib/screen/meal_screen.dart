@@ -263,6 +263,12 @@ class _MealScreenState extends State<MealScreen> {
                         ),
                       ),
                       SizedBox(height: 8),
+                      // Meal ID
+                      Text(
+                        'Meal ID: ${meal['idMeal'] ?? 'N/A'}',
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+                      ),
+                      SizedBox(height: 8),
                       // Category
                       Text(
                         'Category: ${meal['strCategory'] ?? 'N/A'}',
